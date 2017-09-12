@@ -33,7 +33,8 @@ html,body{
   position: relative;
 
   width: 100%;
-  height: 680px;
+  //height: 680px;
+
 }
 /* stage -- end */
 
@@ -44,8 +45,34 @@ html,body{
   width: 100%;
   height: 100%;
 
-  overflow: hidden;
+  //overflow: hidden;     //溢出元素内容区的内容会如何处理,与.img-figure{position:absolute}冲突
   background-color: #ddd;
+
+  /*生成css代码时将内容提到结构的外层
+    否则img-figure在img-sec的内部，
+    生成css代码时会影响性能和可移植性
+  */
+  @at-root {
+    .img-figure{
+      position: absolute;     //绝对定位
+      width: 320px;
+      height: 360px;
+      margin: 0;
+      padding: 40px;
+      background-color: #fff;
+
+      box-sizing: border-box;
+    }
+    figcaption{
+      text-align: center;
+
+      .img-title{
+        margin: 20px 0 0 0;
+        color: #a7a0a2;
+        font-size: 16px;
+      }
+    }
+  }
 }
 /* image -- end */
 /* controller -- start */
